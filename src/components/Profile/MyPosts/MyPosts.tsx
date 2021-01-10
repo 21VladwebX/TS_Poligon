@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {FC, FormEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+import { PostType } from '../../../types/common';
 
 const maxLength10 = maxLengthCreator(10);
 
-let AddNewPostForm = (props) => {
+type AddNewPostFormPropsType = {
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void
+}
+let AddNewPostForm: FC<AddNewPostFormPropsType> = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field name="newPostText" component={Textarea} placeholder={"Post message"}
@@ -21,7 +25,12 @@ let AddNewPostForm = (props) => {
 
 let AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm);
 
-const MyPosts = React.memo(props => {
+type MyPostsPropsType = {
+    posts: Array<PostType>
+    addPost: (newPostText: any) => void
+}
+
+const MyPosts: FC<MyPostsPropsType> = React.memo(props => {
     let postsElements =
         [...props.posts]
             .reverse()
@@ -29,7 +38,7 @@ const MyPosts = React.memo(props => {
 
     let newPostElement = React.createRef();
 
-    let onAddPost = (values) => {
+    let onAddPost = (values: any) => {
         props.addPost(values.newPostText);
     }
 

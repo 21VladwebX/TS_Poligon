@@ -1,5 +1,5 @@
 import {usersAPI} from "../api/api";
-import { PhotoType } from "../types/common";
+import { PhotoType, UserType } from "../types/common";
 import {updateObjectInArray} from "../utils/object-helpers";
 import { type } from 'os';
 
@@ -11,12 +11,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
-type UserType = {
-    id: number
-    name: string
-    status: string
-    photos: PhotoType
-}
+
 
 // type InitialStateType = {
 //     users: Array<UserType>

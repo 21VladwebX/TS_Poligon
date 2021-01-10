@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
+import Message from './Message/Message';
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
+import { DialogType, MessageType } from '../../redux/dialogs-reducer';
 
-const Dialogs = (props) => {
+export type DialogsPropTypes = {
+    dialogsPage: {
+        dialogs: Array<DialogType>
+        messages: Array<MessageType>
+        newMessageBody: string
+    }
+    isAuth: boolean
+
+    sendMessage: (values: any) => void
+
+}
+
+const Dialogs: FC<DialogsPropTypes> = (props) => {
 
     let state = props.dialogsPage;
 
@@ -14,7 +27,7 @@ const Dialogs = (props) => {
     let messagesElements = state.messages.map( m => <Message message={m.message} key={m.id} /> );
     let newMessageBody = state.newMessageBody;
 
-    let addNewMessage = (values) => {
+    let addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageBody);
     }
 
