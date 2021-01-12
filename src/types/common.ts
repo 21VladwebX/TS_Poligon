@@ -22,8 +22,9 @@ export type PhotoType = {
 
 export type ProfileType = {
     userId: number
-    lokkingForAJob: boolean
-    lokkingForAJobDescription: string
+    lookingForAJob: boolean
+    aboutMe: string
+    lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
     photos: Array<PhotoType>
